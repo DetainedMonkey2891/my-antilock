@@ -1,0 +1,484 @@
+AntiCheatNamecall = hookmetamethod(game, "__namecall", newcclosure(function(Self, ...)
+	local Arguments = {...}
+	local AntiCheats = {"BreathingHAMON", "TeleportDetect", "JJARC", "TakePoisonDamage", "CHECKER_1", "CHECKER", "GUI_CHECK", "OneMoreTime", "checkingSPEED", "BANREMOTE", "PERMAIDBAN", "KICKREMOTE", "BR_KICKPC", "FORCEFIELD", "Christmas_Sock", "VirusCough", "Symbiote", "Symbioted", "RequestAFKDisplay"}
+
+	if table.find(AntiCheats, Arguments[1]) and getnamecallmethod() == "FireServer" then
+		return
+	end
+
+	return AntiCheatNamecall(Self, ...)
+end))
+
+local renderstepped = game:GetService("RunService").RenderStepped
+local RunService = game:GetService("RunService")
+local LocalPlayer = game:GetService("Players").LocalPlayer
+local UserInputService = game:GetService("UserInputService")
+-------------
+
+local Stats = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local Frame2 = Instance.new("Frame")
+local TopLine = Instance.new("Frame")
+local TopLine2 = Instance.new("Frame")
+local UIListLayout = Instance.new("UIListLayout")
+local ClientStatsLabel = Instance.new("Frame")
+local Index = Instance.new("TextLabel")
+local Stats_Velocity = Instance.new("Frame")
+local Index_2 = Instance.new("TextLabel")
+local Value = Instance.new("TextLabel")
+local Stats_RotVelocity = Instance.new("Frame")
+local Index_3 = Instance.new("TextLabel")
+local Value_2 = Instance.new("TextLabel")
+local Stats_Rotation = Instance.new("Frame")
+local Index_4 = Instance.new("TextLabel")
+local Value_3 = Instance.new("TextLabel")
+local Stats_Position = Instance.new("Frame")
+local Index_5 = Instance.new("TextLabel")
+local Value_4 = Instance.new("TextLabel")
+
+Stats.Name = "Stats"
+Stats.Parent = game.CoreGui
+Stats.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+Frame2.Parent = Stats
+Frame2.AnchorPoint = Vector2.new(1, 0.5)
+Frame2.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+Frame2.BackgroundTransparency = 0
+Frame2.BorderColor3 = Color3.fromRGB(255,255,255)
+Frame2.BorderSizePixel = 2
+Frame2.Position = UDim2.new(1, -15, 0.43109877, 0)
+Frame2.Size = UDim2.new(0, 200, 0, 110)
+
+Frame.Parent = Stats
+Frame.AnchorPoint = Vector2.new(1, 0.5)
+Frame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+Frame.BackgroundTransparency = 0
+Frame.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Frame.BorderSizePixel = 1
+Frame.Position = UDim2.new(1, -15, 0.43109877, 0)
+Frame.Size = UDim2.new(0, 200, 0, 110)
+
+TopLine.Parent = Stats
+TopLine.AnchorPoint = Vector2.new(1, 0.5)
+TopLine.BackgroundColor3 = Color3.fromRGB(255,255,255)
+TopLine.BackgroundTransparency = 0
+TopLine.BorderColor3 = Color3.fromRGB(60, 60, 60)
+TopLine.BorderSizePixel = 0
+TopLine.Position = UDim2.new(1, -15, 0.4, 0)
+TopLine.Size = UDim2.new(0, 200, 0, 1)
+
+TopLine2.Parent = Stats
+TopLine2.AnchorPoint = Vector2.new(1, 0.5)
+TopLine2.BackgroundColor3 = Color3.fromRGB(255,255,255)
+TopLine2.BackgroundTransparency = 0
+TopLine2.BorderColor3 = Color3.fromRGB(60, 60, 60)
+TopLine2.BorderSizePixel = 0
+TopLine2.Position = UDim2.new(1, -15, 0.378, 0)
+TopLine2.Size = UDim2.new(0, 200, 0, 1)
+
+UIListLayout.Parent = Frame
+UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+
+ClientStatsLabel.Name = "ClientStatsLabel"
+ClientStatsLabel.Parent = Frame
+ClientStatsLabel.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+ClientStatsLabel.BackgroundTransparency = 0
+ClientStatsLabel.BorderColor3 = Color3.fromRGB(60, 60, 60)
+ClientStatsLabel.BorderSizePixel = 0
+ClientStatsLabel.Size = UDim2.new(1, 0, 0, 22)
+
+Index.Name = "Index"
+Index.Parent = ClientStatsLabel
+Index.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Index.BackgroundTransparency = 0
+Index.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Index.BorderSizePixel = 0
+Index.Position = UDim2.new(0, 5, 0, 0)
+Index.Size = UDim2.new(1, -10, 1, 0)
+Index.Font = Enum.Font.SourceSansBold
+Index.Text = "Velocity Stats"
+Index.TextColor3 = Color3.fromRGB(255, 255, 255)
+Index.TextSize = 17
+Index.TextStrokeTransparency = 0.000
+
+Stats_Velocity.Name = "Stats_Velocity"
+Stats_Velocity.Parent = Frame
+Stats_Velocity.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Stats_Velocity.BackgroundTransparency = 0
+Stats_Velocity.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Stats_Velocity.BorderSizePixel = 0
+Stats_Velocity.Size = UDim2.new(1, 0, 0, 22)
+
+Index_2.Name = "Index"
+Index_2.Parent = Stats_Velocity
+Index_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Index_2.BackgroundTransparency = 0
+Index_2.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Index_2.BorderSizePixel = 0
+Index_2.Position = UDim2.new(0, 5, 0, 0)
+Index_2.Size = UDim2.new(0.5, -5, 1, 0)
+Index_2.Font = Enum.Font.SourceSans
+Index_2.Text = "Velocity"
+Index_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Index_2.TextSize = 13.000
+Index_2.TextStrokeTransparency = 0.000
+Index_2.TextXAlignment = Enum.TextXAlignment.Left
+
+Value.Name = "Value"
+Value.Parent = Stats_Velocity
+Value.AnchorPoint = Vector2.new(1, 0)
+Value.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Value.BackgroundTransparency = 0
+Value.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Value.BorderSizePixel = 0
+Value.Position = UDim2.new(1, -5, 0, 0)
+Value.Size = UDim2.new(0.5, -5, 1, 0)
+Value.Font = Enum.Font.SourceSans
+game:GetService("RunService").heartbeat:Connect(function()
+    Value.Text =tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity.X)) .. ", " ..tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity.Y)) ..", " .. tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity.Z))
+end)
+Value.TextColor3 = Color3.fromRGB(255, 255, 255)
+Value.TextSize = 13.000
+Value.TextStrokeTransparency = 0.000
+Value.TextXAlignment = Enum.TextXAlignment.Right
+
+Stats_RotVelocity.Name = "Stats_RotVelocity"
+Stats_RotVelocity.Parent = Frame
+Stats_RotVelocity.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Stats_RotVelocity.BackgroundTransparency = 0
+Stats_RotVelocity.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Stats_RotVelocity.BorderSizePixel = 0
+Stats_RotVelocity.Size = UDim2.new(1, 0, 0, 22)
+
+Index_3.Name = "Index"
+Index_3.Parent = Stats_RotVelocity
+Index_3.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Index_3.BackgroundTransparency = 0
+Index_3.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Index_3.BorderSizePixel = 0
+Index_3.Position = UDim2.new(0, 5, 0, 0)
+Index_3.Size = UDim2.new(0.5, 10, 1, 0)
+Index_3.Font = Enum.Font.SourceSans
+Index_3.Text = "RotVelocity"
+Index_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Index_3.TextSize = 13.000
+Index_3.TextStrokeTransparency = 0.000
+Index_3.TextXAlignment = Enum.TextXAlignment.Left
+
+Value_2.Name = "Value"
+Value_2.Parent = Stats_RotVelocity
+Value_2.AnchorPoint = Vector2.new(1, 0)
+Value_2.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Value_2.BackgroundTransparency = 0
+Value_2.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Value_2.BorderSizePixel = 0
+Value_2.Position = UDim2.new(1, -5, 0, 0)
+Value_2.Size = UDim2.new(0.5, -5, 1, 0)
+Value_2.Font = Enum.Font.SourceSans
+game:GetService("RunService").heartbeat:Connect(function()
+    Value_2.Text = tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.RotVelocity.X)) ..", " ..tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.RotVelocity.Y)) ..", " .. tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.RotVelocity.Z))
+end
+)
+Value_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+Value_2.TextSize = 13.000
+Value_2.TextStrokeTransparency = 0.000
+Value_2.TextXAlignment = Enum.TextXAlignment.Right
+
+Stats_Rotation.Name = "Stats_Rotation"
+Stats_Rotation.Parent = Frame
+Stats_Rotation.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Stats_Rotation.BackgroundTransparency = 0
+Stats_Rotation.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Stats_Rotation.BorderSizePixel = 0
+Stats_Rotation.Size = UDim2.new(1, 0, 0, 22)
+
+Index_4.Name = "Index"
+Index_4.Parent = Stats_Rotation
+Index_4.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Index_4.BackgroundTransparency = 0
+Index_4.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Index_4.BorderSizePixel = 0
+Index_4.Position = UDim2.new(0, 5, 0, 0)
+Index_4.Size = UDim2.new(0.5, -5, 1, 0)
+Index_4.Font = Enum.Font.SourceSans
+Index_4.Text = "Rotation"
+Index_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Index_4.TextSize = 13.000
+Index_4.TextStrokeTransparency = 0.000
+Index_4.TextXAlignment = Enum.TextXAlignment.Left
+
+Value_3.Name = "Value"
+Value_3.Parent = Stats_Rotation
+Value_3.AnchorPoint = Vector2.new(1, 0)
+Value_3.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Value_3.BackgroundTransparency = 0
+Value_3.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Value_3.BorderSizePixel = 0
+Value_3.Position = UDim2.new(1, -5, 0, 0)
+Value_3.Size = UDim2.new(0.5, -5, 1, 0)
+Value_3.Font = Enum.Font.SourceSans
+game:GetService("RunService").heartbeat:Connect(function()
+    Value_3.Text = tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Rotation.X)) ..", " ..tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Rotation.Y)) ..", " .. tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Rotation.Z))
+end)
+Value_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+Value_3.TextSize = 13.000
+Value_3.TextStrokeTransparency = 0.000
+Value_3.TextXAlignment = Enum.TextXAlignment.Right
+
+Stats_Position.Name = "Stats_Position"
+Stats_Position.Parent = Frame
+Stats_Position.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Stats_Position.BackgroundTransparency = 0
+Stats_Position.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Stats_Position.BorderSizePixel = 0
+Stats_Position.Size = UDim2.new(1, 0, 0, 22)
+
+Index_5.Name = "Index"
+Index_5.Parent = Stats_Position
+Index_5.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Index_5.BackgroundTransparency = 0
+Index_5.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Index_5.BorderSizePixel = 0
+Index_5.Position = UDim2.new(0, 5, 0, 0)
+Index_5.Size = UDim2.new(0.5, -5, 1, 0)
+Index_5.Font = Enum.Font.SourceSans
+Index_5.Text = "Position"
+Index_5.TextColor3 = Color3.fromRGB(255, 255, 255)
+Index_5.TextSize = 13.000
+Index_5.TextStrokeTransparency = 0.000
+Index_5.TextXAlignment = Enum.TextXAlignment.Left
+
+Value_4.Name = "Value"
+Value_4.Parent = Stats_Position
+Value_4.AnchorPoint = Vector2.new(1, 0)
+Value_4.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+Value_4.BackgroundTransparency = 0
+Value_4.BorderColor3 = Color3.fromRGB(60, 60, 60)
+Value_4.BorderSizePixel = 0
+Value_4.Position = UDim2.new(1, -5, 0, 0)
+Value_4.Size = UDim2.new(0.5, -5, 1, 0)
+Value_4.Font = Enum.Font.SourceSans
+game:GetService("RunService").heartbeat:Connect(function()
+        Value_4.Text = tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.X)) .. ", " .. tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Y)) .. ", " .. tostring(math.round(game.Players.LocalPlayer.Character.HumanoidRootPart.Position.Z))
+    end
+)
+Value_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+Value_4.TextSize = 13.000
+Value_4.TextStrokeTransparency = 0.000
+Value_4.TextXAlignment = Enum.TextXAlignment.Right
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    TopLine2.Visible = getgenv().antistats
+    TopLine.Visible = getgenv().antistats
+    Frame.Visible = getgenv().antistats
+    Frame2.Visible = getgenv().antistats
+end)
+
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Shake" then 
+    Xmin,XMax = -1000, 10000
+    Ymin,YMax = -1000 , 10000
+    Zmin,ZMax = -10000 , 10000
+    local vel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(math.random(Xmin,XMax) , math.random(Ymin,YMax) , math.random(Zmin,ZMax)) 
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = vel
+    end 
+end)
+
+-- Legit Underground
+getgenv().UndergroundAmount = 90
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Legit Underground" then 
+    local vel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,-getgenv().UndergroundAmount,0) 
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = vel
+    end 
+end)
+
+-- Legit Sky
+getgenv().SkyAmount = 90
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Legit Sky" then 
+    local vel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0,getgenv().SkyAmount,0) 
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = vel
+    end 
+end)
+
+-- XYZ Anti
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Axes (X,Y,Z)" then 
+    local vel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(getgenv().X,getgenv().Y,getgenv().Z) 
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = vel
+    end 
+end)
+
+-- Crazy Anti
+getgenv().AntiStrength = -9999 
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Crazy Anti" then 
+    local vel = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(4542,getgenv().AntiStrength,3242) 
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = vel
+    end 
+end)
+
+-- Demsise Shitty Desync
+game:GetService("RunService").heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Demsise Shitty Desync" then 
+    local abc = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(1,1,1) * (2^16)
+    game:GetService("RunService").RenderStepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = abc
+    end 
+end)
+
+-- Lock Fucker 
+game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Lock Fucker" then 
+    local velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = velocity * 0 + Vector3.new(math.random(1,16384),math.random(1,16384),math.random(1,16384))
+    game.Players.LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = velocity * 0 + Vector3.new(math.random(1,16384),math.random(1,16384),math.random(1,16384))
+    renderstepped:Wait()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = velocity
+    game.Players.LocalPlayer.Character.HumanoidRootPart.AssemblyLinearVelocity = velocity
+    end
+end)
+
+-- Velocity Multiplier
+game:GetService("RunService").Heartbeat:Connect(function()
+    if getgenv().antitoggle and getgenv().antitype == "Velocity Multiplier" then 
+        local velocity = game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = velocity * getgenv().velmult
+        renderstepped:Wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.Velocity = velocity
+    end
+end)
+
+-- Auto Stomp and No Slowdown
+
+RunService.Stepped:Connect(function()
+	if getgenv().noslowdown then
+		local Slowdowns = LocalPlayer.Character.BodyEffects.Movement:FindFirstChild("NoJumping") or LocalPlayer.Character.BodyEffects.Movement:FindFirstChild("ReduceWalk") or LocalPlayer.Character.BodyEffects.Movement:FindFirstChild("NoWalkSpeed")
+
+		if Slowdowns then
+			Slowdowns:Destroy()
+		end
+
+		if LocalPlayer.Character.BodyEffects.Reload.Value then
+			LocalPlayer.Character.BodyEffects.Reload.Value = false
+		end
+	end
+end)
+
+RunService.Stepped:Connect(function()
+	if getgenv().autostomp then
+		game.ReplicatedStorage.MainEvent:FireServer("Stomp")
+	end
+end)
+
+RunService.Stepped:Connect(function()
+	if getgenv().autoreload and LocalPlayer.Character:FindFirstChildWhichIsA("Tool") and LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Ammo and LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Ammo.Value <= 0 then
+		game.ReplicatedStorage.MainEvent:FireServer("Reload", LocalPlayer.Character:FindFirstChildWhichIsA("Tool"))
+	end
+end)
+
+RunService.Stepped:Connect(function()
+	if getgenv().SpeedEnabled then
+		LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + LocalPlayer.Character.Humanoid.MoveDirection * getgenv().SpeedAmount
+	end
+end)
+
+RunService.Stepped:Connect(function()
+	if getgenv().AutoJump and LocalPlayer.Character.Humanoid:GetState() ~= Enum.HumanoidStateType.Freefall and LocalPlayer.Character.Humanoid.MoveDirection.Magnitude > 0 then
+		LocalPlayer.Character.Humanoid:ChangeState("Jumping")
+	end
+end)
+
+RunService.Stepped:Connect(function()
+	if getgenv().BunnyHop and LocalPlayer.Character.Humanoid.FloorMaterial == Enum.Material.Air then
+		LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame + LocalPlayer.Character.Humanoid.MoveDirection * getgenv().HopAmount
+	end
+end)
+
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+
+local Window = Library.CreateLib("Simple Fucking Anti jesus", "DarkTheme")
+local Tab = Window:NewTab("Main")
+local Section = Tab:NewSection("Anti")
+local Dahoodian = Window:NewTab("Movement")
+local higuys = Dahoodian:NewSection("Movement")
+
+Section:NewToggle("Toggle", "", function(Boolean)
+    getgenv().antitoggle = Boolean
+end)
+
+Section:NewToggle("Velocity Stats", "", function(Boolean)
+    getgenv().antistats = Boolean
+end)
+
+Section:NewDropdown("Select Anti  Type", "None", {"Shake", "Legit Underground", "Legit Sky", "Crazy Anti", "Axes (X,Y,Z)", "Demsise Shitty Desync", "Sortta Desync", "Lock Fucker", "Velocity Multiplier"}, function(Boolean)
+    getgenv().antitype = Boolean
+end)
+
+Section:NewSlider("X", "", 1000, 0, function(Boolean) 
+    getgenv().X = Boolean
+end)
+
+Section:NewSlider("Y", "", 1000, 0, function(Boolean) 
+    getgenv().Y = Boolean
+end)
+
+Section:NewSlider("Z", "", 1000, 0, function(Boolean) 
+    getgenv().Z = Boolean
+end)
+
+Section:NewSlider("Multiplier Amount", "", 20, 0, function(Boolean) 
+    getgenv().velmult = Boolean
+end)
+
+higuys:NewToggle("No Slow Down", "", function(Boolean)
+    getgenv().noslowdown = Boolean
+end)
+
+higuys:NewToggle("No Jump Cool Down", "", function(Boolean)
+    if Boolean == true then
+	LocalPlayer.Character.Humanoid.UseJumpPower = false
+    elseif Boolea == false then
+    LocalPlayer.Character.Humanoid.UseJumpPower = false
+    end
+end)
+
+higuys:NewToggle("Auto Stomp", "", function(Boolean)
+    getgenv().autostomp = Boolean
+end)
+
+higuys:NewToggle("Auto Reload", "", function(Boolean)
+    getgenv().autoreload = Boolean
+end)
+
+higuys:NewToggle("Auto Reload", "", function(Boolean)
+    getgenv().AutoJump = Boolean
+end)
+
+higuys:NewToggle("Speed", "", function(Boolean)
+    getgenv().SpeedEnabled = Boolean
+end)
+
+higuys:NewSlider("Speed Amount", "", 7, 0, function(Boolean) 
+    getgenv().SpeedAmount = Boolean
+end)
+
+higuys:NewToggle("Bunny Hop", "", function(Boolean)
+    getgenv().BunnyHop = Boolean
+end)
+
+higuys:NewSlider("Bunny Hop Amount", "", 7, 0, function(Boolean) 
+    getgenv().HopAmount = Boolean
+end)
